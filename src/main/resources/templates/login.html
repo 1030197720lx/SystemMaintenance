@@ -1,0 +1,51 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" >
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scal=1">
+    <link rel="stylesheet" href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css">
+    <script src="webjars/jquery/3.1.1/jquery.min.js"></script>
+    <script src="webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-14 ">
+                <form class="form-horizontal" method="post" action="/user/login" enctype="multipart/form-data">
+                    <!-- 表单区域-->
+                    <fieldset>
+                        <!--表单主题-->
+                        <legend>登录</legend>
+                        <!-- 每一个form-group都可以自定义布局-->
+                        <div class="form-group">
+                            <img class="col-md-offset-5" th:src="@{/asserts/img/bootstrap-solid.svg}" src="asserts/img/bootstrap-solid.svg" alt="" width="72" height="72">
+                            <h1  class="row col-md-4 col-md-offset-4">Please sign in</h1>
+                        </div>
+                        <div class="form-group">
+                            <!-- label表示文字提示标签,可以通过表单的组建的id提示-->
+                            <label class="col-md-4 control-label" >用户名:</label>
+                            <div class="col-md-4">
+                                <input class="form-control"  name="username" type="text" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <!-- label表示文字提示标签,可以通过表单的组建的id提示-->
+                            <label class="col-md-4 control-label" >密码:</label>
+                            <div class="col-md-4">
+                                <input class="form-control"  name="password" type="text" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-5">
+                                <input class="btn btn-primary" type="submit" value="登录"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

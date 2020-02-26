@@ -1,0 +1,99 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" >
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scal=1">
+    <link rel="stylesheet" href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css">
+    <script src="webjars/jquery/3.1.1/jquery.min.js"></script>
+    <script src="webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/webjars/bootstrapvalidator/0.5.3/css/bootstrapValidator.css">
+    <link rel="stylesheet" href="/webjars/bootstrapvalidator/0.5.3/css/bootstrapValidator.min.css">
+    <script src="webjars/bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js>"></script>
+    <script src="webjars/bootstrapvalidator/0.5.3/js/bootstrapValidator.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-14 ">
+                <form class="form-horizontal" id="AppForm" method="post" action="/save" enctype="multipart/form-data">
+                    <!-- 表单区域-->
+                    <fieldset>
+                        <!--表单主题-->
+                        <legend>新建</legend>
+                        <!-- 每一个form-group都可以自定义布局-->
+                        <div class="form-group">
+                            <!-- label表示文字提示标签,可以通过表单的组建的id提示-->
+                            <label class="col-md-4 control-label" >系统编码:</label>
+                            <div class="col-md-4">
+                                <input class="form-control"  name="code" type="text" value="1" data-bv-notempty="true"
+                                       data-bv-notempty-message="系统编码不能为空" th:value="${maintenance?.code}"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <!-- label表示文字提示标签,可以通过表单的组建的id提示-->
+                            <label class="col-md-4 control-label" for="simple-name">系统简称:</label>
+                            <div class="col-md-4">
+                                <input class="form-control" id="simple-name" name="simpleName" type="text" data-bv-notempty="true"
+                                       data-bv-notempty-message="系统简称不能为空" th:value="${maintenance?.simpleName}"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <!-- label表示文字提示标签,可以通过表单的组建的id提示-->
+                            <label class="col-md-4 control-label" for="full-name">系统全称:</label>
+                            <div class="col-md-4">
+                                <input class="form-control" id="full-name" name="fullName" type="text" data-bv-notempty="true"
+                                       data-bv-notempty-message="系统全称不能为空" th:value="${maintenance?.fullName}"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <!-- label表示文字提示标签,可以通过表单的组建的id提示-->
+                            <label class="col-md-4 control-label" for="order-no">排序号:</label>
+                            <div class="col-md-4">
+                                <input class="form-control" id="order-no" name="orderNo" type="text"  th:value="${maintenance?.orderNo}"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="status">状态:</label>
+                            <div class="col-md-4">
+                                <select id="status" class="form-control" name="status" th:value="${maintenance?.status}">
+                                    <option th:selected="${maintenance?.status=='enable'}" value="enable">启用</option>
+                                    <option th:selected="${maintenance?.status=='disable'}" value="disable">禁用</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-4" for="entrance">系统入口:</label>
+                            <div class="col-md-4">
+                                <input class="form-control" id="entrance" name="entrance" type="text" data-bv-notempty="true"
+                                       data-bv-notempty-message="系统入口不能为空" th:value="${maintenance?.entrance}"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-4" for="pic">系统图标:</label>
+                            <div class="col-md-4">
+                                <input id="pic" type="file" multiple="multiple" name="pic"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-4" for="description">系统描述:</label>
+                            <div class="col-md-4">
+                                <input class="form-control" id="description" name="description" type="text" th:value="${maintenance?.description}"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-5">
+                                <input class="btn btn-primary" type="submit" value="提交"/>
+                                <button class="btn btn-warning"  onclick="javascrtpt:window.location.href='/queryAll'">取消</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+<script>
+    $('#AppForm').bootstrapValidator();
+</script>
+</body>
+</html>

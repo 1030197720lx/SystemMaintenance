@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" >
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="webjars/bootstrap-table/1.15.5/bootstrap-table.min.css">
+
+</head>
+<body>
+
+<div class="container" id="sys_list">
+
+    <div>
+        <div class="row">
+            <legend class="col-md-6">系统列表</legend>
+            <button class="col-md-1 col-md-offset-4 btn btn-primary" onclick="create()">新建</button>
+        </div>
+        <form class="form-horizontal row" method="post" action="/query">
+            <!-- 表单区域-->
+            <fieldset>
+
+                <!-- 每一个form-group都可以自定义布局-->
+                <div class="form-group col-md-3" >
+                    <!-- label表示文字提示标签,可以通过表单的组建的id提示-->
+                    <label class="col-md-5 control-label" for="code">系统编码:</label>
+                    <div class="col-md-7">
+                        <input class="form-control" id="code" name="code" type="text"/>
+                    </div>
+                </div>
+                <div class="form-group col-md-3">
+                    <!-- label表示文字提示标签,可以通过表单的组建的id提示-->
+                    <label class="col-md-5 control-label" for="full-name">系统全称:</label>
+                    <div class="col-md-7">
+                        <input class="form-control" id="full-name" name="fullName" type="text" />
+                    </div>
+                </div>
+                <div class="form-group col-md-3">
+                    <!-- label表示文字提示标签,可以通过表单的组建的id提示-->
+                    <label class="col-md-5 control-label" for="status">状态:</label>
+                    <div class="col-md-7">
+                        <select  class="form-control" name="status" >
+                            <option value="" disabled selected hidden>请选择状态</option>
+                            <option  value="enable">启用</option>
+                            <option  value="disable">禁用</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col-md-3">
+                    <div >
+                        <input class="btn btn-primary col-md-4 col-md-offset-2" type="submit" value="提交"/>
+                        <input class="btn btn-warning col-md-4 col-md-offset-1" type="reset" value="重置"/>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <table id="table"
+           data-toggle="table"
+           data-show-columns="true"
+           data-pagination="true"
+           data-height="500">
+<!--           data-search="true"-->
+<!--           data-show-refresh="true"-->
+<!--           data-show-toggle="true"-->
+
+
+        <thead>
+        <tr>
+            <th data-field="code">系统编码</th>
+            <th data-field="simple-name">系统简称</th>
+            <th data-field="full-name">系统全称</th>
+            <th data-field="description">系统描述</th>
+            <th data-field="entrance">系统入口</th>
+            <th data-field="order_no">排序号</th>
+            <th data-field="status">状态</th>
+            <th data-field="operation">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="prod:${maintenance}">
+            <td data-field="code" th:text="${prod.code}">1</td>
+            <td data-field="simple-name" th:text="${prod.simpleName}">1</td>
+            <td data-field="full-name" th:text="${prod.fullName}">1</td>
+            <td data-field="description" th:text="${prod.description}">1</td>
+            <td data-field="entrance" th:text="${prod.entrance}">1</td>
+            <td data-field="order_no" th:text="${prod.orderNo}">1</td>
+            <div th:switch="${prod.status}">
+                <td th:case="enable" data-field="status" >启用</td>
+                <td th:case="disable" data-field="status" >禁用</td>
+                <td th:case="*" data-field="status" >禁用</td>
+            </div>
+            <td data-field="operation" th:switch="${prod.status}">
+                <a th:href="@{/queryById(id=${prod.id})}">编辑</a>
+                <a th:href="@{/deleteById(id=${prod.id})}">删除</a>
+                <a th:case="enable" th:href="@{/changeStatus(id=${prod.id},status='disabled')}">禁用</a>
+                <a th:case="disable" th:href="@{/changeStatus(id=${prod.id},status='enable')}">启用</a>
+                <a th:case="*" th:href="@{/changeStatus(id=${prod.id},status='enable')}">启用</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script src="webjars/jquery/3.1.1/jquery.min.js"></script>
+<script src="webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+<script src="webjars/bootstrap-table/1.15.5/bootstrap-table.js"></script>
+<script>
+    function create(){
+        window.location.href="/queryById";
+    }
+</script>
+</body>
+</html>

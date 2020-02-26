@@ -1,0 +1,40 @@
+server:
+  port: 8086
+
+spring:
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://localhost:3306/sys_maintenance?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    driver-class-name: com.mysql.jdbc.Driver
+  thymeleaf:
+    cache: false
+
+  mvc:
+    date-format: yyyy-MM-dd
+mybatis:
+  mapper-locations: classpath:mapping/*Mapper.xml
+  type-aliases-package: com.hand.system.systemmaintenance.dto
+
+#showSql
+logging:
+  level:
+    com:
+      hand: trace
+  # 在当前磁盘的根路径下创建spring文件夹和里面的log文件夹；使用 spring.log 作为默认文件,可以指定完整的路径；
+  file:
+    path: ./logs/sys
+
+
+  pattern:
+    # 指定文件中日志输出的格式
+    file: "%d{yyyy-MM-dd} === [%thread] === %-5level === %logger{50} ==== %msg%n"
+    #  在控制台输出的日志的格式
+    console: "%d{yyyy-MM-dd} [%thread] %-5level %logger{50} - %msg%n"
+
+
+  maxFileSize: 50M
+  maxRequestSize: 50M
+
+file:
+  path: /src/main/resources/file
